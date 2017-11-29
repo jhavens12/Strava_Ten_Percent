@@ -160,4 +160,4 @@ button1.action = button_action_1
 v.present(style='sheet', hide_title_bar=True)
 
 current_period(master_dict)
-period(master_dict,0,2)
+period(master_dict,0,1)
