@@ -1,7 +1,7 @@
 # Strava_Ten_Percent
 
-computer.py is used to run on the desktop
+Winter_10.py is the python3 version
 
-Winter_10.py is meant for pytonista to run
+Winter_10.py is meant for pythonista as it includes setting labels. Need the pyui file as well
 
 Need to create a credentials.py file which sets the api_key variable from Strava

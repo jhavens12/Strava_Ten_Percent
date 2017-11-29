@@ -1,5 +1,6 @@
-#import ui #used for pythonista
-#import console #used for pythonista
+#pythonista version
+import ui #used for pythonista
+import console #used for pythonista
 import get_time
 import get_data
 import calc
@@ -10,16 +11,11 @@ import pylab
 from io import BytesIO
 from pprint import pprint
 
-
-#Last week: sunday (0) + Monday (2)
-#week before: Sunday (1) + Monday (3)
-
 master_dict = get_data.my_filtered_activities()
 
 def period(dictionary,Sunday,Monday):
 
     dict_1 = dictionary.copy()
-    #if key is newer than last sunday, remove it
     for key in dictionary:
         if key > get_time.LS(Sunday):
             del dict_1[key]
@@ -54,42 +50,32 @@ def period(dictionary,Sunday,Monday):
 
     remaining(past_ten_percent,past_miles)
 
-    print("past run")
-    print(past_run_count)
-    print(past_miles)
-    print(past_ten_percent)
-    print(past_run_title_label)
-    print(past_run_mile_label)
-    print(past_run_pace_label)
-    print(past_run_elapsed_label)
-    print(past_run_treadmill_label)
+    label1= v['label1']
+    label1.text = (get_time.convert_weekday_full(get_time.LM(Monday)) + " - " + get_time.convert_weekday_full(get_time.LS(Sunday)))
 
-    # label1= v['label1']
-    # label1.text = (get_time.convert_weekday_full(get_time.LM(2)) + " - " + get_time.convert_weekday_full(get_time.LS(0)))
-    #
-    # label2= v['label2']
-    # label2.text = str(past_miles)
-    #
+    label2= v['label2']
+    label2.text = str(past_miles)
+
     # label3= v['label3']
     # label3.text = str(past_run_count)
-    #
-    # label4= v['label4']
-    # label4.text = str(past_ten_percent)
-    #
-    # label5= v['label5']
-    # label5.text = ("\n".join(past_run_title_label))
-    #
-    # label6= v['label6']
-    # label6.text = ("\n".join(past_run_mile_label))
-    #
-    # label7= v['label7']
-    # label7.text = ("\n".join(past_run_pace_label))
-    #
-    # label8= v['label8']
-    # label20.text = ("\n".join(past_run_elapsed_label))
-    #
-    # label9= v['label9']
-    # label9.text = ("\n".join(past_run_partner_label))
+
+    label4= v['label4']
+    label4.text = str(past_ten_percent)
+
+    label5= v['label5']
+    label5.text = ("\n".join(past_run_title_label))
+
+    label6= v['label6']
+    label6.text = ("\n".join(past_run_mile_label))
+
+    label7= v['label7']
+    label7.text = ("\n".join(past_run_pace_label))
+
+    label8= v['label8']
+    label8.text = ("\n".join(past_run_elapsed_label))
+
+    label9= v['label9']
+    label9.text = ("\n".join(past_run_treadmill_label))
 
 def current_period(dictionary):
     dict_2 = dictionary.copy()
@@ -120,44 +106,59 @@ def current_period(dictionary):
     for i in list(sorted(dict_2)):
         current_run_treadmill_label.append(str(dict_2[i]['treadmill_flagged']))
 
-    print("current run")
-    print(current_run_title_label)
-    print(current_run_mile_label)
-    print(current_run_pace_label)
-    print(current_run_elapsed_label)
-    print(current_run_treadmill_label)
+    label20= v['label20']
+    label20.text = (get_time.weekday(get_time.LM(0)) + " " + str(get_time.LM(0).day) + " - " + get_time.weekday(get_time.now()) + " " + str(get_time.now().day))
 
-    # label20= v['label20']
-    # label20.text = (get_time.weekday(get_time.LM(0)) + " " + str(get_time.LM(0).day) + " - " + get_time.weekday(get_time.now()) + " " + str(get_time.now().day))
-    #
     # label21= v['label21']
     # label21.text = str(current_week_count)
-    #
-    # label22= v['label22']
-    # label22.text = str(current_miles)
-    #
-    # label23= v['label23']
-    # label23.text = ("\n".join(current_run_title_label))
-    #
-    # label24= v['label24']
-    # label24.text = ("\n".join(current_run_mile_label))
-    #
-    # label25= v['label25']
-    # label25.text = ("\n".join(current_run_pace_label))
-    #
-    # label26= v['label26']
-    # label26.text = ("\n".join(current_run_elapsed_label))
-    #
-    # label27= v['label27']
-    # label27.text = ("\n".join(current_run_partner_label))
+
+    label22= v['label22']
+    label22.text = str(current_miles)
+
+    label23= v['label23']
+    label23.text = ("\n".join(current_run_title_label))
+
+    label24= v['label24']
+    label24.text = ("\n".join(current_run_mile_label))
+
+    label25= v['label25']
+    label25.text = ("\n".join(current_run_pace_label))
+
+    label26= v['label26']
+    label26.text = ("\n".join(current_run_elapsed_label))
+
+    label27= v['label27']
+    label27.text = ("\n".join(current_run_treadmill_label))
 
 def remaining(past_ten_percent,past_miles):
     remaining_miles = ("{0:.2f}".format((float(past_ten_percent) + float(past_miles)) - float(current_miles)))
 
-    print("REMAINING")
-    print(remaining_miles)
-    # label40= v['label40']
-    # label40.text = str(remaining_miles)
+    label40= v['label40']
+    label40.text = str(remaining_miles)
+
+#button
+def button_action_1(sender):
+
+    if button1.selected_index == 0:
+        period(master_dict,0,1)
+
+    if button1.selected_index == 1:
+        period(master_dict,1,2)
+
+    if button1.selected_index == 2:
+        period(master_dict,2,3)
+
+    elif button1.selected_index == 3:
+        period(master_dict,3,4)
+
+# starts gui
+v = ui.load_view()
+v.background_color = "black"
+
+button1 = v['segmentedcontrol1']
+button1.action = button_action_1
+
+v.present(style='sheet', hide_title_bar=True)
 
 current_period(master_dict)
-period(master_dict,0,2)
+period(master_dict,0,1)
