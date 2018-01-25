@@ -1,4 +1,5 @@
 # Strava_Ten_Percent
+DEPRECIATED
 
 Winter_10.py is the python3 version
 
